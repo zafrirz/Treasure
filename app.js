@@ -182,7 +182,7 @@ async function parseSelectedSheet() {
     if (!asText(source["שם היעד"])) validationErrors.push(`שורה ${excelRow}: חסר שם יעד.`);
     if (!englishName || !slug || !/^[A-Za-z0-9 -]+$/.test(englishName)) validationErrors.push(`שורה ${excelRow}: שם היעד באנגלית יכול להכיל רק אותיות באנגלית, מספרים, רווחים ומקפים.`);
     if (!Number.isFinite(order) || order <= 0) validationErrors.push(`שורה ${excelRow}: סדר היעדים חייב להיות מספר חיובי.`);
-    const acceptedAnswers = asText(source["תשובה לחידה"]).split(";").map(answer => answer.trim()).filter(Boolean);
+    const acceptedAnswers = asText(source["תשובה לחידה"]).split(/[;；]/u).map(answer => answer.trim()).filter(Boolean);
     const row = {
       game,
       order,
@@ -311,7 +311,7 @@ async function github(path, token, options = {}) {
 const encodePath = path => path.split("/").map(encodeURIComponent).join("/");
 
 function targetPageTemplate(label) {
-  return `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3a952"><title>${label}</title><link rel="stylesheet" href="/Treasure/styles.css"><link rel="stylesheet" href="/Treasure/site-extra.css"><script src="/Treasure/target.js" defer><\/script></head><body class="target-page"><a class="home-link" href="/Treasure/">לעמוד הראשי (Admin only)</a><main id="quest-root" class="quest-card" aria-live="polite"><div class="quest-content">טוען את היעד…</div></main></body></html>`;
+  return `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3a952"><title>${label}</title><link rel="stylesheet" href="/Treasure/styles.css"><link rel="stylesheet" href="/Treasure/site-extra.css?v=20260912-3"><script src="/Treasure/target.js?v=20260912-3" defer><\/script></head><body class="target-page"><a class="home-link" href="/Treasure/">לעמוד הראשי (Admin only)</a><main id="quest-root" class="quest-card" aria-live="polite"><div class="quest-content">טוען את היעד…</div></main></body></html>`;
 }
 
 async function applyWorkbook() {
