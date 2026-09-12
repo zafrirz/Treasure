@@ -8,6 +8,7 @@
   <meta name="description" content="עמודי משחק חפש את המטמון למשפחה ולחברים">
   <link rel="stylesheet" href="/Treasure/styles.css">
   <link rel="stylesheet" href="/Treasure/auth.css">
+  <link rel="stylesheet" href="/Treasure/site-extra.css">
   <script src="/Treasure/auth.js"></script>
   <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
   <script src="/Treasure/app.js" defer></script>
@@ -20,17 +21,9 @@
       <p id="active-game" class="active-game">טוען את המשחק…</p>
       <div class="hero-actions">
         <a id="print-link" class="button primary" href="/Treasure/print.html?print=1" target="_blank" rel="noopener">הדפסת קודי QR</a>
-        <button id="download-current" class="button secondary" type="button">הורדת ההגדרות הנוכחיות (ללא תשובות)</button>
+        <button id="download-current" class="button secondary" type="button">הורדת קובץ ההגדרות הנוכחי</button>
       </div>
     </header>
-
-    <section aria-labelledby="targets-title">
-      <div class="section-heading">
-        <p class="section-kicker">תחנות המשחק</p>
-        <h2 id="targets-title">היעדים הפעילים</h2>
-      </div>
-      <div id="target-grid" class="target-grid" aria-live="polite"></div>
-    </section>
 
     <details class="admin-panel">
       <summary>ניהול ועדכון המשחק</summary>
@@ -46,12 +39,21 @@
         <label class="field token-field">
           <span>אסימון גישה ל-GitHub</span>
           <input id="github-token" type="password" autocomplete="off" spellcheck="false" placeholder="Fine-grained token עם הרשאת Contents: Read and write">
-          <small>האסימון משמש רק בזמן ההחלה ואינו נשמר בדפדפן או באתר.</small>
+          <small>האסימון נשמר במכשיר זה בלבד עד להתנתקות מעמוד האדמין.</small>
         </label>
         <button id="apply-workbook" class="button danger" type="button" disabled>החל את הקובץ על האתר</button>
         <div id="apply-status" class="apply-status" aria-live="polite"></div>
       </div>
     </details>
+
+    <section class="targets-section" aria-labelledby="targets-title">
+      <div class="section-heading section-heading-row">
+        <div><p class="section-kicker">תחנות המשחק</p><h2 id="targets-title">יעדים וקודי QR</h2></div>
+        <label class="field compact-field"><span>הצגת משחק</span><select id="display-game-select"><option value="">כל המשחקים</option></select></label>
+      </div>
+      <div id="target-grid" class="games-list" aria-live="polite"></div>
+    </section>
   </main>
 </body>
 </html>
+
