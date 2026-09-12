@@ -2,7 +2,7 @@ const BASE_PATH = "/Treasure";
 
 const extraStyles = document.createElement("link");
 extraStyles.rel = "stylesheet";
-extraStyles.href = `${BASE_PATH}/site-extra.css`;
+extraStyles.href = `${BASE_PATH}/site-extra.css?v=20260912-3`;
 document.head.append(extraStyles);
 const homeLink = document.querySelector(".home-link");
 if (homeLink) homeLink.textContent = "לעמוד הראשי (Admin only)";
