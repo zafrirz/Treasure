@@ -1,5 +1,12 @@
 const BASE_PATH = "/Treasure";
 
+const extraStyles = document.createElement("link");
+extraStyles.rel = "stylesheet";
+extraStyles.href = `${BASE_PATH}/site-extra.css`;
+document.head.append(extraStyles);
+const homeLink = document.querySelector(".home-link");
+if (homeLink) homeLink.textContent = "לעמוד הראשי (Admin only)";
+
 async function sha256(value) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
   return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
@@ -31,7 +38,9 @@ async function loadTarget() {
 
     const content = document.createElement("div");
     content.className = "quest-content";
-    const description = section("תיאור היעד", row.description || "ליעד זה טרם הוזן תיאור.");
+    const description = document.createElement("p");
+    description.className = "target-description";
+    description.textContent = row.description || "ליעד זה טרם הוזן תיאור.";
     const riddleWrap = document.createElement("section");
     riddleWrap.className = "quest-section riddle-box";
     const riddleTitle = document.createElement("h2");
@@ -108,3 +117,4 @@ function showNext(content, next) {
 }
 
 loadTarget();
+
