@@ -6,61 +6,84 @@
   <title>הדפסת קודי QR</title>
   <link rel="stylesheet" href="/Treasure/styles.css">
   <link rel="stylesheet" href="/Treasure/auth.css">
+  <link rel="stylesheet" href="/Treasure/site-extra.css">
   <script src="/Treasure/auth.js"></script>
 </head>
 <body>
   <main class="print-page">
-    <h1>קודי QR למשחק הפעיל - הדפסה בגודל 100%</h1>
-    <section id="cut-grid" class="cut-grid" aria-label="קודי QR להדפסה"></section>
+    <header class="print-toolbar print-only-hidden">
+      <div><p class="section-kicker">הדפסה</p><h1>קודי QR</h1></div>
+      <label class="field compact-field"><span>בחירת משחק</span><select id="print-game-select"><option value="">כל המשחקים</option></select></label>
+      <button id="print-now" class="button print-action" type="button">הדפסה</button>
+    </header>
+    <div id="print-groups" aria-label="קודי QR להדפסה"></div>
   </main>
   <script>
     const basePath = "/Treasure";
     const siteUrl = "https://zafrirz.github.io/Treasure";
     const params = new URLSearchParams(location.search);
-    window.treasureAuthReady.then(() => fetch(`${basePath}/data.json?ts=${Date.now()}`, { cache: "no-store" }))
+    const selector = document.querySelector("#print-game-select");
+    const groupsRoot = document.querySelector("#print-groups");
+    let config;
+
+    function createQrCard(row, loads) {
+      const card = document.createElement("article");
+      card.className = "cut-card";
+      const image = document.createElement("img");
+      const stableUrl = `${siteUrl}/${row.slug}/`;
+      image.alt = `QR עבור ${row.englishName}`;
+      loads.push(new Promise((resolve, reject) => {
+        image.addEventListener("load", resolve, { once: true });
+        image.addEventListener("error", () => reject(new Error(`לא ניתן ליצור QR עבור ${row.englishName}`)), { once: true });
+        image.src = `https://api.qrserver.com/v1/create-qr-code/?size=560x560&format=svg&margin=20&data=${encodeURIComponent(stableUrl)}`;
+      }));
+      const title = document.createElement("h2");
+      title.textContent = row.englishName;
+      const address = document.createElement("p");
+      address.textContent = `zafrirz.github.io/Treasure/${row.slug}`;
+      card.append(image, title, address);
+      return card;
+    }
+
+    async function render(selectedGame, printAfter = false) {
+      groupsRoot.replaceChildren();
+      const games = [...new Set(config.rows.map(row => row.game))].filter(game => !selectedGame || game === selectedGame);
+      const loads = [];
+      games.forEach(game => {
+        const section = document.createElement("section");
+        section.className = "print-game-group";
+        const title = document.createElement("h2");
+        title.className = "print-game-title";
+        title.textContent = game === config.activeGame ? `${game} · משחק פעיל` : `${game} · לא פעיל`;
+        const grid = document.createElement("div");
+        grid.className = "cut-grid";
+        config.rows.filter(row => row.game === game).sort((a, b) => a.order - b.order).forEach(row => grid.append(createQrCard(row, loads)));
+        section.append(title, grid);
+        groupsRoot.append(section);
+      });
+      if (!loads.length) throw new Error("לא נמצאו יעדים למשחק שנבחר.");
+      await Promise.all(loads);
+      if (printAfter) window.print();
+    }
+
+    window.treasureAuthReady
+      .then(() => fetch(`${basePath}/data.json?ts=${Date.now()}`, { cache: "no-store" }))
       .then(response => {
         if (!response.ok) throw new Error(`לא ניתן לטעון את נתוני המשחק (${response.status}).`);
         return response.json();
       })
-      .then(config => {
-        const grid = document.querySelector("#cut-grid");
-        const selectedGame = params.get("game") || config.activeGame;
-        document.querySelector("h1").textContent = `קודי QR למשחק: ${selectedGame}`;
-        const imageLoads = config.rows
-          .filter(row => row.game === selectedGame)
-          .sort((a, b) => a.order - b.order)
-          .map(row => {
-            const card = document.createElement("article");
-            card.className = "cut-card";
-            const image = document.createElement("img");
-            const stableUrl = `${siteUrl}/${row.slug}/`;
-            image.src = `https://api.qrserver.com/v1/create-qr-code/?size=560x560&format=svg&margin=20&data=${encodeURIComponent(stableUrl)}`;
-            image.alt = `QR עבור ${row.englishName}`;
-            const title = document.createElement("h2");
-            title.textContent = row.englishName;
-            const base = document.createElement("p");
-            base.textContent = "zafrirz.github.io/Treasure/";
-            const slug = document.createElement("p");
-            slug.textContent = row.slug;
-            card.append(image, title, base, slug);
-            grid.append(card);
-            return new Promise(resolve => {
-              if (image.complete) resolve();
-              else {
-                image.addEventListener("load", resolve, { once: true });
-                image.addEventListener("error", resolve, { once: true });
-              }
-            });
-          });
-        if (!imageLoads.length) throw new Error("לא נמצאו יעדים למשחק שנבחר.");
-        return Promise.all(imageLoads);
+      .then(async loaded => {
+        config = loaded;
+        [...new Set(config.rows.map(row => row.game))].forEach(game => selector.add(new Option(game, game)));
+        const requested = params.get("game") || "";
+        selector.value = [...selector.options].some(option => option.value === requested) ? requested : "";
+        await render(selector.value, params.has("print"));
       })
-      .then(() => {
-        if (params.has("print")) window.print();
-      })
-      .catch(error => {
-        document.querySelector("#cut-grid").textContent = error.message;
-      });
+      .catch(error => { groupsRoot.textContent = error.message; });
+
+    selector.addEventListener("change", () => render(selector.value).catch(error => { groupsRoot.textContent = error.message; }));
+    document.querySelector("#print-now").addEventListener("click", () => render(selector.value, true).catch(error => { groupsRoot.textContent = error.message; }));
   </script>
 </body>
 </html>
+
