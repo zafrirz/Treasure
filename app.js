@@ -4,6 +4,7 @@ const REPOSITORY = "zafrirz/Treasure";
 const BRANCH = "main";
 const TOKEN_STORAGE_KEY = "treasure-github-token";
 const ANSWER_STORAGE_KEY = "treasure-answer-cache";
+const DISPLAY_GAME_STORAGE_KEY = "treasure-display-game";
 const HEADERS = ["שם המשחק", "סדר היעדים", "שם היעד", "הוראות הגעה", "תיאור היעד", "חידה", "תשובה לחידה", "שם היעד באנגלית", "כתובת העמוד"];
 const FIELDS = ["game", "order", "targetName", "directions", "description", "riddle", "answerHash", "englishName", "pageUrl", "slug"];
 
@@ -69,11 +70,11 @@ async function loadCurrentConfig() {
 }
 
 function populateDisplayGames() {
-  const selected = elements.displayGame.value;
+  const selected = localStorage.getItem(DISPLAY_GAME_STORAGE_KEY) || elements.displayGame.value;
   const games = [...new Set(currentConfig.rows.map(row => row.game).filter(Boolean))];
   elements.displayGame.replaceChildren(new Option("כל המשחקים", ""));
   games.forEach(game => elements.displayGame.add(new Option(game, game)));
-  if (games.includes(selected)) elements.displayGame.value = selected;
+  elements.displayGame.value = games.includes(selected) ? selected : "";
 }
 
 function renderHome() {
@@ -126,8 +127,8 @@ function renderHome() {
     elements.targetGrid.append(group);
   });
   elements.printLink.href = selectedGame
-    ? `${BASE_PATH}/print.html?print=1&layout=4&game=${encodeURIComponent(selectedGame)}`
-    : `${BASE_PATH}/print.html?print=1&layout=4`;
+    ? `${BASE_PATH}/print.html?print=1&layout=5&game=${encodeURIComponent(selectedGame)}`
+    : `${BASE_PATH}/print.html?print=1&layout=5`;
 }
 
 function setNotice(message, type = "neutral") {
@@ -387,6 +388,7 @@ function downloadCurrentWorkbook() {
   }));
   const workbook = XLSX.utils.book_new();
   const worksheet = XLSX.utils.json_to_sheet(rows, { header: HEADERS });
+  workbook.Workbook = { Views: [{ RTL: true }] };
   XLSX.utils.book_append_sheet(workbook, worksheet, currentConfig.sheetName || "יעדים");
   XLSX.writeFile(workbook, "treasure-current.xlsx");
 }
@@ -406,7 +408,10 @@ elements.file.addEventListener("change", async event => {
 });
 elements.sheet.addEventListener("change", parseSelectedSheet);
 elements.game.addEventListener("change", updateDiffPreview);
-elements.displayGame.addEventListener("change", renderHome);
+elements.displayGame.addEventListener("change", () => {
+  localStorage.setItem(DISPLAY_GAME_STORAGE_KEY, elements.displayGame.value);
+  renderHome();
+});
 elements.download.addEventListener("click", downloadCurrentWorkbook);
 elements.apply.addEventListener("click", applyWorkbook);
 
