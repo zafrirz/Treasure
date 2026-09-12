@@ -1,0 +1,70 @@
+.targets-section { margin-top: 34px; }
+.section-heading-row, .game-group-heading, .print-toolbar {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 14px;
+}
+.compact-field { min-width: 220px; }
+.games-list { display: grid; gap: 28px; }
+.game-group { display: grid; gap: 12px; }
+.game-group-heading h3 { margin: 0px; font-size: 1.25rem; }
+.status-badge, .target-status {
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  border-radius: 999px;
+  font-weight: 800;
+}
+.status-badge { padding: 5px 9px; font-size: 0.72rem; }
+.status-badge.active, .target-status { color: #15533e; background: #dff0e8; }
+.status-badge.inactive { color: #655d52; background: #e8e3da; }
+.target-status { margin-top: 8px; padding: 3px 7px; font-size: 0.65rem; }
+.inactive-card { opacity: 0.58; filter: grayscale(0.55); }
+.inactive-card .target-status { color: #655d52; background: #e8e3da; }
+.home-link { padding: 3px 5px !important; font-size: 0.58rem !important; opacity: 0.7; }
+.target-description { margin: 0 0 28px; font-size: clamp(1rem, 4vw, 1.2rem); line-height: 1.7; }
+.print-toolbar {
+  max-width: 190mm;
+  margin: 0 auto 5mm;
+  direction: rtl;
+}
+.print-toolbar h1 { margin: 0; font-size: 1.15rem; }
+.print-game-group { margin-bottom: 5mm; break-inside: avoid-page; }
+.print-game-title {
+  margin: 0 0 2mm;
+  padding-bottom: 1mm;
+  border-bottom: 0.4mm solid #17352b;
+  font-size: 10pt;
+  direction: rtl;
+}
+.cut-grid {
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 0 !important;
+  width: 100%;
+  border-top: 0.25mm dashed #555;
+  border-inline-start: 0.25mm dashed #555;
+}
+.cut-card {
+  width: auto !important;
+  min-width: 0;
+  padding: 1.2mm;
+  border-inline-end: 0.25mm dashed #555;
+  border-bottom: 0.25mm dashed #555;
+}
+.cut-card img { width: 100% !important; height: auto !important; aspect-ratio: 1; }
+.cut-card h2 { font-size: 7pt !important; }
+.print-action { min-height: 36px; padding: 7px 12px; color: #fff; background: #174b3a; }
+@media (max-width: 620px) {
+  .section-heading-row, .game-group-heading, .print-toolbar { align-items: stretch; flex-direction: column; }
+  .compact-field { width: 100%; min-width: 0; }
+}
+@media print {
+  .print-toolbar { display: none !important; }
+  .print-game-group { margin-bottom: 3mm; }
+  .print-game-title { font-size: 8pt; }
+  .cut-card { padding: 0.7mm; }
+  .cut-card h2 { font-size: 5.5pt !important; }
+  .cut-card p { font-size: 3.2pt !important; }
+}
+
