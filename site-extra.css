@@ -77,10 +77,10 @@
   .compact-field { width: 100%; min-width: 0; }
 }
 @media print {
-  .print-toolbar { display: none !important; }
+  .print-toolbar, .admin-logout { display: none !important; }
   .print-game-group { margin-bottom: 3mm; }
   .print-game-title { font-size: 8pt; }
-  .cut-card { padding: 0.7mm; }
+  .cut-card { padding: 1.2mm; }
   .cut-card h2 { font-size: 5.5pt !important; }
   .cut-card p { font-size: 3.2pt !important; }
 }
