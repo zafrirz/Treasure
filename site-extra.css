@@ -23,6 +23,25 @@
 .inactive-card { opacity: 0.58; filter: grayscale(0.55); }
 .inactive-card .target-status { color: #655d52; background: #e8e3da; }
 .home-link { padding: 3px 5px !important; font-size: 0.58rem !important; opacity: 0.7; }
+.target-page {
+  background:
+    radial-gradient(circle at 14% 10%, rgba(255, 255, 255, 0.38), transparent 22rem),
+    linear-gradient(145deg, #ffd7a0, #f6b968);
+}
+.target-page .quest-card { background: #dff5fb; }
+.target-page .quest-header {
+  color: #402817;
+  background: linear-gradient(135deg, #ffd292, #f3a952);
+}
+.target-page .quest-step { color: #173f58; }
+.target-page .quest-content { background: #dff5fb; }
+.target-page .riddle-box { background: #eefbfe; border-color: #b9dfe8; }
+.target-page .answer-form input {
+  color: #123c42;
+  background: #bff2ed;
+  border-color: #54aaa5;
+}
+.target-page .answer-form input::placeholder { color: #3e716f; opacity: 1; }
 .target-description { margin: 0 0 28px; font-size: clamp(1rem, 4vw, 1.2rem); line-height: 1.7; }
 .print-toolbar {
   max-width: 190mm;
