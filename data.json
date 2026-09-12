@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "activeGame": "יום הולדת 7 לרעי",
+  "sheetName": "יעדים",
+  "sourceFile": "חפש את המטמון לרעי.xlsx",
+  "updatedAt": "2026-09-11T00:00:00+03:00",
+  "rows": [
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 1,
+      "targetName": "שער הבננות",
+      "directions": "שער הכניסה המזרחי ביותר של הקיבוץ, נקרא על שם אחד מענפי החקלאות המניבים ביותר של מעגן.",
+      "description": "תיאור",
+      "riddle": "ספרו את מספר עמודי התמיכה האנכיים של השער (לא כולל המסגרת)",
+      "answerHash": "e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
+      "englishName": "Banana-Gate",
+      "pageUrl": "https://zafrirz.github.io/Treasure/banana-gate/",
+      "slug": "banana-gate"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 2,
+      "targetName": "שלט הפרסום הגדול",
+      "directions": "",
+      "description": "תיאור",
+      "riddle": "מה מספר הכביש הסמוך לשלט?",
+      "answerHash": "8241649609f88ccd2a0a5b233a07a538ec313ff6adf695aa44a969dbca39f67d",
+      "englishName": "Large-Billboard",
+      "pageUrl": "https://zafrirz.github.io/Treasure/large-billboard/",
+      "slug": "large-billboard"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 3,
+      "targetName": "בית התנשמות",
+      "directions": "בית עץ מיוחד ומעט גבוה בין מטע האבוקדו למזבלה, הוא משמש עופות דורסים שמסייעים למגדלים להגן על המטעים מפני מכרסמים.",
+      "description": "תיאור",
+      "riddle": "אתרו מספר בן 4 ספרות על אחד מעמודי הברזל של בית העץ סמוך לבתי התנשמות.",
+      "answerHash": "262b06d105e1c865b01c3e0a74291cdae511ef15f3d456e14fbe2dffd9efe3b9",
+      "englishName": "Owl-House",
+      "pageUrl": "https://zafrirz.github.io/Treasure/owl-house/",
+      "slug": "owl-house"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 4,
+      "targetName": "הטנק",
+      "directions": "אני עשוי מברזל, זחלתי כאן שנה לפני שקיבוץ מעגן הוקם ולא חזרתי הביתה מאז.",
+      "description": "תיאור",
+      "riddle": "",
+      "answerHash": "",
+      "englishName": "Tank",
+      "pageUrl": "https://zafrirz.github.io/Treasure/tank/",
+      "slug": "tank"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 5,
+      "targetName": "קיר הטיפוס",
+      "directions": "",
+      "description": "תיאור",
+      "riddle": "",
+      "answerHash": "",
+      "englishName": "Climbing-Wall",
+      "pageUrl": "https://zafrirz.github.io/Treasure/climbing-wall/",
+      "slug": "climbing-wall"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 6,
+      "targetName": "בית זימבל לזר",
+      "directions": "המקום שבו פעלה הרפת של מעגן.",
+      "description": "תיאור",
+      "riddle": "",
+      "answerHash": "",
+      "englishName": "Zimball-Lazar-House",
+      "pageUrl": "https://zafrirz.github.io/Treasure/zimball-lazar-house/",
+      "slug": "zimball-lazar-house"
+    },
+    {
+      "game": "יום כיף אנבידיה 2026",
+      "order": 1,
+      "targetName": "בית התנשמות",
+      "directions": "בית עץ מיוחד ומעט גבוה בין מטע האבוקדו למזבלה, הוא משמש עופות דורסים שמסייעים למגדלים להגן על המטעים מפני מכרסמים.",
+      "description": "תיאור",
+      "riddle": "אתרו מספר בן 4 ספרות על אחד מעמודי הברזל של בית העץ סמוך לבתי התנשמות.",
+      "answerHash": "262b06d105e1c865b01c3e0a74291cdae511ef15f3d456e14fbe2dffd9efe3b9",
+      "englishName": "Owl-House",
+      "pageUrl": "https://zafrirz.github.io/Treasure/owl-house/",
+      "slug": "owl-house"
+    },
+    {
+      "game": "יום כיף אנבידיה 2026",
+      "order": 2,
+      "targetName": "הטנק",
+      "directions": "אני עשוי מברזל, זחלתי כאן שנה לפני שקיבוץ מעגן הוקם ולא חזרתי הביתה מאז.",
+      "description": "תיאור",
+      "riddle": "",
+      "answerHash": "",
+      "englishName": "Tank",
+      "pageUrl": "https://zafrirz.github.io/Treasure/tank/",
+      "slug": "tank"
+    }
+  ]
+}
+
