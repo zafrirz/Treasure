@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "activeGame": "יום הולדת 7 לרעי",
+  "activeGame": "כללי",
   "sheetName": "יעדים",
   "sourceFile": "חפש את המטמון לרעי.xlsx",
-  "updatedAt": "2026-09-12T08:46:37.794Z",
+  "updatedAt": "2026-09-12T09:46:28.654Z",
   "rows": [
     {
       "game": "יום כיף אנבידיה 2026",
@@ -124,6 +124,42 @@
       "englishName": "Zimball-Lazar-House",
       "pageUrl": "https://zafrirz.github.io/Treasure/zimball-lazar-house/",
       "slug": "zimball-lazar-house"
+    },
+    {
+      "game": "כללי",
+      "order": 1,
+      "targetName": "בית התנשמות",
+      "directions": "הוראות משחק כללי",
+      "description": "תיאור משחק כללי",
+      "riddle": "אתרו מספר בן 4 ספרות על אחד מעמודי הברזל של בית העץ סמוך לבתי התנשמות.",
+      "answerHash": "262b06d105e1c865b01c3e0a74291cdae511ef15f3d456e14fbe2dffd9efe3b9",
+      "englishName": "Owl-House",
+      "pageUrl": "https://zafrirz.github.io/Treasure/owl-house/",
+      "slug": "owl-house"
+    },
+    {
+      "game": "כללי",
+      "order": 2,
+      "targetName": "הטנק",
+      "directions": "הוראות משחק כללי",
+      "description": "תיאור משחק כללי",
+      "riddle": "",
+      "answerHash": "",
+      "englishName": "Tank",
+      "pageUrl": "https://zafrirz.github.io/Treasure/tank/",
+      "slug": "tank"
+    },
+    {
+      "game": "כללי",
+      "order": 3,
+      "targetName": "אנדרטה",
+      "directions": "הוראות משחק כללי",
+      "description": "בשליחות צנחני ההצלה במלחמת העולם השנייה לקחו חלק שלושה מחברי מעגן: יונה רוזן (הוא שגייס את חנה סנש), יואל פלגי, ופרץ גולדשטיין, שנספה במשימה",
+      "riddle": "",
+      "answerHash": "",
+      "englishName": "Memorial",
+      "pageUrl": "https://zafrirz.github.io/Treasure/memorial/",
+      "slug": "memorial"
     }
   ]
 }
