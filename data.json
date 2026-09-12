@@ -3,7 +3,7 @@
   "activeGame": "יום הולדת 7 לרעי",
   "sheetName": "יעדים",
   "sourceFile": "חפש את המטמון לרעי.xlsx",
-  "updatedAt": "2026-09-12T11:25:00.108Z",
+  "updatedAt": "2026-09-12T11:39:53.772Z",
   "rows": [
     {
       "game": "יום כיף אנבידיה 2026",
@@ -132,7 +132,7 @@
       "directions": "הייתי פעם חלק מעץ, הניחו אותי הפוך בנקודת תצפית מדהימה לכנרת.",
       "description": "קיבוץ מעגן שוכן בדרום הכנרת. מכאן תוכלו לראות בין היתר את מושבת כנרת, קיבוץ אלומות, טבריה, מגדל, צפת, קיבוץ עין גב וקיבוץ האון",
       "riddle": "מהו ההר הגבוה בישראל שניתן לראות מכאן ביום בהיר?",
-      "answerHash": "0b1464490ca8ba5be2bcdbcd4f065cc5cde7d249a2cb64a0a9a5e4fd7ab796fe",
+      "answerHash": "17123e1a261f795006f2ffb9442490734c6b199efb4bb95107f59e9a72a54d34;f1c140e02f32ce4fbaae2cabeb8a286a472caad68c9edb13f826a1608ce13ad7",
       "englishName": "Upside-down-Trunk",
       "pageUrl": "https://zafrirz.github.io/Treasure/upside-down-trunk/",
       "slug": "upside-down-trunk"
