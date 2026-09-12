@@ -126,8 +126,8 @@ function renderHome() {
     elements.targetGrid.append(group);
   });
   elements.printLink.href = selectedGame
-    ? `${BASE_PATH}/print.html?print=1&game=${encodeURIComponent(selectedGame)}`
-    : `${BASE_PATH}/print.html?print=1`;
+    ? `${BASE_PATH}/print.html?print=1&layout=4&game=${encodeURIComponent(selectedGame)}`
+    : `${BASE_PATH}/print.html?print=1&layout=4`;
 }
 
 function setNotice(message, type = "neutral") {
@@ -311,7 +311,7 @@ async function github(path, token, options = {}) {
 const encodePath = path => path.split("/").map(encodeURIComponent).join("/");
 
 function targetPageTemplate(label) {
-  return `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3a952"><title>${label}</title><link rel="stylesheet" href="/Treasure/styles.css"><link rel="stylesheet" href="/Treasure/site-extra.css?v=20260912-3"><script src="/Treasure/target.js?v=20260912-3" defer><\/script></head><body class="target-page"><a class="home-link" href="/Treasure/">לעמוד הראשי (Admin only)</a><main id="quest-root" class="quest-card" aria-live="polite"><div class="quest-content">טוען את היעד…</div></main></body></html>`;
+  return `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f3a952"><title>${label}</title><link rel="stylesheet" href="/Treasure/styles.css"><link rel="stylesheet" href="/Treasure/site-extra.css?v=20260912-4"><script src="/Treasure/target.js?v=20260912-3" defer><\/script></head><body class="target-page"><a class="home-link" href="/Treasure/">לעמוד הראשי (Admin only)</a><main id="quest-root" class="quest-card" aria-live="polite"><div class="quest-content">טוען את היעד…</div></main></body></html>`;
 }
 
 async function applyWorkbook() {
