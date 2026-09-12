@@ -182,6 +182,7 @@ async function parseSelectedSheet() {
     if (!asText(source["שם היעד"])) validationErrors.push(`שורה ${excelRow}: חסר שם יעד.`);
     if (!englishName || !slug || !/^[A-Za-z0-9 -]+$/.test(englishName)) validationErrors.push(`שורה ${excelRow}: שם היעד באנגלית יכול להכיל רק אותיות באנגלית, מספרים, רווחים ומקפים.`);
     if (!Number.isFinite(order) || order <= 0) validationErrors.push(`שורה ${excelRow}: סדר היעדים חייב להיות מספר חיובי.`);
+    const acceptedAnswers = asText(source["תשובה לחידה"]).split(";").map(answer => answer.trim()).filter(Boolean);
     const row = {
       game,
       order,
@@ -189,13 +190,13 @@ async function parseSelectedSheet() {
       directions: asText(source["הוראות הגעה"]),
       description: asText(source["תיאור היעד"]),
       riddle: asText(source["חידה"]),
-      answerHash: await sha256(source["תשובה לחידה"]),
+      answerHash: (await Promise.all(acceptedAnswers.map(answer => sha256(answer)))).join(";"),
       englishName,
       pageUrl: `${SITE_URL}/${slug}/`,
       slug
     };
     parsedRows.push(row);
-    parsedAnswers.set(recordKey(row), asText(source["תשובה לחידה"]));
+    parsedAnswers.set(recordKey(row), acceptedAnswers.join("; "));
   }
 
   const duplicates = new Set();
