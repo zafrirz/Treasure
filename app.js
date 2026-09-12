@@ -2,17 +2,21 @@ const BASE_PATH = "/Treasure";
 const SITE_URL = "https://zafrirz.github.io/Treasure";
 const REPOSITORY = "zafrirz/Treasure";
 const BRANCH = "main";
+const TOKEN_STORAGE_KEY = "treasure-github-token";
+const ANSWER_STORAGE_KEY = "treasure-answer-cache";
 const HEADERS = ["שם המשחק", "סדר היעדים", "שם היעד", "הוראות הגעה", "תיאור היעד", "חידה", "תשובה לחידה", "שם היעד באנגלית", "כתובת העמוד"];
 const FIELDS = ["game", "order", "targetName", "directions", "description", "riddle", "answerHash", "englishName", "pageUrl", "slug"];
 
 let currentConfig = { activeGame: "", sheetName: "יעדים", rows: [] };
 let loadedWorkbook = null;
 let parsedRows = [];
+let parsedAnswers = new Map();
 let validationErrors = [];
 
 const elements = {
   activeGame: document.querySelector("#active-game"),
   printLink: document.querySelector("#print-link"),
+  displayGame: document.querySelector("#display-game-select"),
   targetGrid: document.querySelector("#target-grid"),
   download: document.querySelector("#download-current"),
   file: document.querySelector("#excel-file"),
@@ -37,39 +41,93 @@ async function sha256(value) {
   return [...new Uint8Array(digest)].map(byte => byte.toString(16).padStart(2, "0")).join("");
 }
 
+function loadAnswerCache() {
+  try { return JSON.parse(localStorage.getItem(ANSWER_STORAGE_KEY) || "{}"); }
+  catch { return {}; }
+}
+
+function saveAnswerCache(cache) {
+  localStorage.setItem(ANSWER_STORAGE_KEY, JSON.stringify(cache));
+}
+
+function cacheAnswers(rows, onlyIfCurrentHash = false) {
+  const cache = loadAnswerCache();
+  rows.forEach(row => {
+    const key = recordKey(row);
+    const current = currentConfig.rows.find(item => recordKey(item) === key);
+    if (!onlyIfCurrentHash || (current && current.answerHash === row.answerHash)) cache[key] = parsedAnswers.get(key) || "";
+  });
+  saveAnswerCache(cache);
+}
+
 async function loadCurrentConfig() {
   const response = await fetch(`${BASE_PATH}/data.json?ts=${Date.now()}`, { cache: "no-store" });
   if (!response.ok) throw new Error("לא ניתן לטעון את הגדרות המשחק הנוכחיות.");
   currentConfig = await response.json();
+  populateDisplayGames();
   renderHome();
+}
+
+function populateDisplayGames() {
+  const selected = elements.displayGame.value;
+  const games = [...new Set(currentConfig.rows.map(row => row.game).filter(Boolean))];
+  elements.displayGame.replaceChildren(new Option("כל המשחקים", ""));
+  games.forEach(game => elements.displayGame.add(new Option(game, game)));
+  if (games.includes(selected)) elements.displayGame.value = selected;
 }
 
 function renderHome() {
   elements.activeGame.textContent = currentConfig.activeGame || "לא נבחר משחק פעיל";
   elements.targetGrid.replaceChildren();
-  const rows = currentConfig.rows.filter(row => row.game === currentConfig.activeGame).sort((a, b) => a.order - b.order);
-  if (!rows.length) {
-    elements.targetGrid.textContent = "אין יעדים להצגה במשחק הפעיל.";
+  const selectedGame = elements.displayGame.value;
+  const games = [...new Set(currentConfig.rows.map(row => row.game).filter(game => !selectedGame || game === selectedGame))];
+  if (!games.length) {
+    elements.targetGrid.textContent = "אין משחקים להצגה.";
     return;
   }
-  rows.forEach(row => {
-    const link = document.createElement("a");
-    link.className = "target-card";
-    link.href = `${BASE_PATH}/${row.slug}/`;
-    const qr = document.createElement("img");
-    qr.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&format=svg&margin=10&data=${encodeURIComponent(stableTargetUrl(row))}`;
-    qr.alt = `QR עבור ${row.englishName}`;
-    const copy = document.createElement("div");
-    const step = document.createElement("small");
-    step.textContent = `יעד ${row.order}`;
-    const title = document.createElement("h3");
-    title.textContent = row.targetName;
-    const path = document.createElement("p");
-    path.textContent = row.englishName;
-    copy.append(step, title, path);
-    link.append(qr, copy);
-    elements.targetGrid.append(link);
+  const activeSlugs = new Set(currentConfig.rows.filter(row => row.game === currentConfig.activeGame).map(row => row.slug));
+  games.forEach(game => {
+    const group = document.createElement("section");
+    group.className = "game-group";
+    const heading = document.createElement("div");
+    heading.className = "game-group-heading";
+    const gameTitle = document.createElement("h3");
+    gameTitle.textContent = game;
+    const gameStatus = document.createElement("span");
+    gameStatus.className = game === currentConfig.activeGame ? "status-badge active" : "status-badge inactive";
+    gameStatus.textContent = game === currentConfig.activeGame ? "משחק פעיל" : "משחק לא פעיל";
+    heading.append(gameTitle, gameStatus);
+    const grid = document.createElement("div");
+    grid.className = "target-grid";
+    currentConfig.rows.filter(row => row.game === game).sort((a, b) => a.order - b.order).forEach(row => {
+      const link = document.createElement("a");
+      link.className = "target-card";
+      link.href = `${BASE_PATH}/${row.slug}/`;
+      const usedByActiveGame = game !== currentConfig.activeGame && activeSlugs.has(row.slug);
+      if (game !== currentConfig.activeGame) link.classList.add("inactive-card");
+      const qr = document.createElement("img");
+      qr.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&format=svg&margin=10&data=${encodeURIComponent(stableTargetUrl(row))}`;
+      qr.alt = `QR עבור ${row.englishName}`;
+      const copy = document.createElement("div");
+      const step = document.createElement("small");
+      step.textContent = `יעד ${row.order}`;
+      const title = document.createElement("h3");
+      title.textContent = row.targetName;
+      const path = document.createElement("p");
+      path.textContent = row.englishName;
+      const status = document.createElement("span");
+      status.className = "target-status";
+      status.textContent = game === currentConfig.activeGame ? "פעיל" : usedByActiveGame ? "לא פעיל · בשימוש המשחק הפעיל" : "לא פעיל";
+      copy.append(step, title, path, status);
+      link.append(qr, copy);
+      grid.append(link);
+    });
+    group.append(heading, grid);
+    elements.targetGrid.append(group);
   });
+  elements.printLink.href = selectedGame
+    ? `${BASE_PATH}/print.html?print=1&game=${encodeURIComponent(selectedGame)}`
+    : `${BASE_PATH}/print.html?print=1`;
 }
 
 function setNotice(message, type = "neutral") {
@@ -98,6 +156,7 @@ function populateSelect(select, values, placeholder) {
 async function parseSelectedSheet() {
   validationErrors = [];
   parsedRows = [];
+  parsedAnswers = new Map();
   const sheetName = elements.sheet.value;
   const sheet = loadedWorkbook.Sheets[sheetName];
   const matrix = XLSX.utils.sheet_to_json(sheet, { header: 1, defval: "", raw: true });
@@ -123,7 +182,7 @@ async function parseSelectedSheet() {
     if (!asText(source["שם היעד"])) validationErrors.push(`שורה ${excelRow}: חסר שם יעד.`);
     if (!englishName || !slug || !/^[A-Za-z0-9 -]+$/.test(englishName)) validationErrors.push(`שורה ${excelRow}: שם היעד באנגלית יכול להכיל רק אותיות באנגלית, מספרים, רווחים ומקפים.`);
     if (!Number.isFinite(order) || order <= 0) validationErrors.push(`שורה ${excelRow}: סדר היעדים חייב להיות מספר חיובי.`);
-    parsedRows.push({
+    const row = {
       game,
       order,
       targetName: asText(source["שם היעד"]),
@@ -134,7 +193,9 @@ async function parseSelectedSheet() {
       englishName,
       pageUrl: `${SITE_URL}/${slug}/`,
       slug
-    });
+    };
+    parsedRows.push(row);
+    parsedAnswers.set(recordKey(row), asText(source["תשובה לחידה"]));
   }
 
   const duplicates = new Set();
@@ -165,6 +226,7 @@ async function parseSelectedSheet() {
     elements.apply.disabled = false;
   }
   updateDiffPreview();
+  if (!validationErrors.length) cacheAnswers(parsedRows, true);
 }
 
 function diffForGame(game, baseConfig = currentConfig) {
@@ -188,10 +250,6 @@ function diffForGame(game, baseConfig = currentConfig) {
 }
 
 function updateDiffPreview() {
-  const selectedGame = elements.game.value;
-  elements.printLink.href = selectedGame
-    ? `${BASE_PATH}/print.html?print=1&game=${encodeURIComponent(selectedGame)}`
-    : `${BASE_PATH}/print.html?print=1`;
   if (validationErrors.length || !elements.game.value) {
     elements.changes.hidden = true;
     return;
@@ -252,7 +310,7 @@ async function github(path, token, options = {}) {
 const encodePath = path => path.split("/").map(encodeURIComponent).join("/");
 
 function targetPageTemplate(label) {
-  return `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#174b3a"><title>${label}</title><link rel="stylesheet" href="/Treasure/styles.css"><script src="/Treasure/target.js" defer><\/script></head><body class="target-page"><a class="home-link" href="/Treasure/">לעמוד הראשי</a><main id="quest-root" class="quest-card" aria-live="polite"><div class="quest-content">טוען את היעד…</div></main></body></html>`;
+  return `<!doctype html><html lang="he" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#174b3a"><title>${label}</title><link rel="stylesheet" href="/Treasure/styles.css"><link rel="stylesheet" href="/Treasure/site-extra.css"><script src="/Treasure/target.js" defer><\/script></head><body class="target-page"><a class="home-link" href="/Treasure/">לעמוד הראשי (Admin only)</a><main id="quest-root" class="quest-card" aria-live="polite"><div class="quest-content">טוען את היעד…</div></main></body></html>`;
 }
 
 async function applyWorkbook() {
@@ -300,9 +358,11 @@ async function applyWorkbook() {
       }
     }
     currentConfig = remoteConfig;
+    cacheAnswers(remoteDiff.incoming);
+    localStorage.setItem(TOKEN_STORAGE_KEY, token);
+    populateDisplayGames();
     renderHome();
     elements.status.textContent = `העדכון נשלח בהצלחה. ${createdPages ? `נוצרו ${createdPages} עמודים חדשים. ` : ""}GitHub Pages עשוי להציג אותו לאחר מספר דקות.`;
-    elements.token.value = "";
     updateDiffPreview();
   } catch (error) {
     elements.status.textContent = `העדכון נכשל: ${error.message}`;
@@ -320,7 +380,7 @@ function downloadCurrentWorkbook() {
     "הוראות הגעה": row.directions,
     "תיאור היעד": row.description,
     "חידה": row.riddle,
-    "תשובה לחידה": "",
+    "תשובה לחידה": loadAnswerCache()[recordKey(row)] || "",
     "שם היעד באנגלית": row.englishName,
     "כתובת העמוד": row.pageUrl
   }));
@@ -345,10 +405,14 @@ elements.file.addEventListener("change", async event => {
 });
 elements.sheet.addEventListener("change", parseSelectedSheet);
 elements.game.addEventListener("change", updateDiffPreview);
+elements.displayGame.addEventListener("change", renderHome);
 elements.download.addEventListener("click", downloadCurrentWorkbook);
 elements.apply.addEventListener("click", applyWorkbook);
+
+elements.token.value = localStorage.getItem(TOKEN_STORAGE_KEY) || "";
 
 loadCurrentConfig().catch(error => {
   elements.activeGame.textContent = "שגיאה בטעינת המשחק";
   elements.targetGrid.textContent = error.message;
 });
+
