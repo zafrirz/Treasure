@@ -1,0 +1,39 @@
+.auth-locked .site-shell,
+.auth-locked .print-page { display: none; }
+
+.auth-gate {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  padding: 18px;
+}
+
+.auth-card {
+  width: min(430px, 100%);
+  padding: 30px;
+  border: 1px solid rgba(23, 75, 58, .14);
+  border-radius: 24px;
+  background: #fffdf7;
+  box-shadow: 0 22px 60px rgba(42, 55, 45, .15);
+}
+
+.auth-card h1 { margin: 0; font-size: 2rem; }
+.auth-card > p:not(.eyebrow):not(.auth-feedback) { margin: 12px 0 22px; color: #65736d; }
+.auth-card .button { width: 100%; margin-top: 14px; color: #17352b; background: #f4d991; }
+.auth-feedback { min-height: 1.4em; margin: 12px 0 0; color: #8d3028; font-weight: 700; }
+
+.admin-logout {
+  position: fixed;
+  z-index: 10;
+  top: 10px;
+  inset-inline-end: 10px;
+  padding: 7px 10px;
+  border: 0;
+  border-radius: 9px;
+  color: #fff;
+  background: rgba(18, 62, 49, .86);
+  font-size: .75rem;
+  font-weight: 800;
+  cursor: pointer;
+  backdrop-filter: blur(7px);
+}
