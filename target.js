@@ -67,7 +67,8 @@ async function loadTarget() {
       riddleWrap.append(form, feedback);
       form.addEventListener("submit", async event => {
         event.preventDefault();
-        const correct = await sha256(input.value.trim()) === row.answerHash;
+        const acceptedHashes = row.answerHash.split(";").map(hash => hash.trim()).filter(Boolean);
+        const correct = acceptedHashes.includes(await sha256(input.value.trim()));
         if (!correct) {
           feedback.className = "feedback error";
           feedback.textContent = "התשובה אינה מדויקת. נסו שוב.";
