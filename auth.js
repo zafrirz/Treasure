@@ -14,6 +14,8 @@
     button.textContent = "התנתקות";
     button.addEventListener("click", () => {
       localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem("treasure-github-token");
+      localStorage.removeItem("treasure-answer-cache");
       location.reload();
     });
     document.body.append(button);
@@ -62,3 +64,4 @@
     document.addEventListener("DOMContentLoaded", showGate, { once: true });
   }
 })();
+
