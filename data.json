@@ -1,9 +1,9 @@
 {
   "version": 1,
-  "activeGame": "כללי",
+  "activeGame": "יום הולדת 7 לרעי",
   "sheetName": "יעדים",
   "sourceFile": "חפש את המטמון לרעי.xlsx",
-  "updatedAt": "2026-09-12T09:46:28.654Z",
+  "updatedAt": "2026-09-12T10:21:33.731Z",
   "rows": [
     {
       "game": "יום כיף אנבידיה 2026",
@@ -28,102 +28,6 @@
       "englishName": "Tank",
       "pageUrl": "https://zafrirz.github.io/Treasure/tank/",
       "slug": "tank"
-    },
-    {
-      "game": "יום הולדת 7 לרעי",
-      "order": 1,
-      "targetName": "שער הבננות",
-      "directions": "מכוניות וטרקטורים נכנסים דרכי לקיבוץ, וקראו לי על שם אחד מענפי החקלאות המניבים ביותר של מעגן.",
-      "description": "שער הבננות הוא אחד מ-6 שערים חשמליים בקיבוץ (זוכרים איפה כולם נמצאים?), והוא שער המעבר למטעי הבננות ממזרח לקיבוץ. ענף הבננות במעגן ...",
-      "riddle": "ספרו את מספר עמודי התמיכה האנכיים של השער (לא כולל המסגרת)",
-      "answerHash": "e629fa6598d732768f7c726b4b621285f9c3b85303900aa912017db7617d8bdb",
-      "englishName": "Banana-Gate",
-      "pageUrl": "https://zafrirz.github.io/Treasure/banana-gate/",
-      "slug": "banana-gate"
-    },
-    {
-      "game": "יום הולדת 7 לרעי",
-      "order": 2,
-      "targetName": "שלט הפרסום הגדול",
-      "directions": "אני נמצא באחת מפינות הקיבוץ, יש לי שני צדדים, אני גדול ובולט ואוהב שמסתכלים עלי.",
-      "description": "ליד שלט הפרסום הגדול חולפות מדי יום יותר מ-10,000 מכוניות בשני הכיוונים. אחרי שנים רבות שלא נעשה בו שימוש, הוא חודש לאחרונה ומשווק לבעלי עסקים על מנת להגדיל את הכנסות הקיבוץ לטובת הקהילה.",
-      "riddle": "מה מספר הכביש הסמוך לשלט?",
-      "answerHash": "8241649609f88ccd2a0a5b233a07a538ec313ff6adf695aa44a969dbca39f67d",
-      "englishName": "Large-Billboard",
-      "pageUrl": "https://zafrirz.github.io/Treasure/large-billboard/",
-      "slug": "large-billboard"
-    },
-    {
-      "game": "יום הולדת 7 לרעי",
-      "order": 3,
-      "targetName": "בית התנשמות",
-      "directions": "מגדלי האבוקדו בנו אותי כדי לארח עלי חברים עם כנפיים. ילדים אוהבים לטפס עלי למרות שיש כאן ריח לא נעים לפעמים.",
-      "description": "הוצב במטע האבוקדו הוצב כדי להזמין את הדורסות הליליות להתמקם סמוך לעצים ולסייע בהדברה טבעית של מכרסמים. זוג תנשמות עשוי לצוד אלפי מכרסמים בשנה, וכך לתרום להגנת היבול בדרך ידידותית יותר לסביבה ולהפחית את השימוש בחומרי הדברה.",
-      "riddle": "אתרו מספר בן 4 ספרות על אחד מעמודי הברזל של בית העץ סמוך לבתי התנשמות.",
-      "answerHash": "262b06d105e1c865b01c3e0a74291cdae511ef15f3d456e14fbe2dffd9efe3b9",
-      "englishName": "Owl-House",
-      "pageUrl": "https://zafrirz.github.io/Treasure/owl-house/",
-      "slug": "owl-house"
-    },
-    {
-      "game": "יום הולדת 7 לרעי",
-      "order": 4,
-      "targetName": "הטנק",
-      "directions": "אני עשוי מברזל, זחלתי כאן שנה לפני שקיבוץ מעגן הוקם ולא חזרתי הביתה מאז.",
-      "description": "תיאור",
-      "riddle": "",
-      "answerHash": "",
-      "englishName": "Tank",
-      "pageUrl": "https://zafrirz.github.io/Treasure/tank/",
-      "slug": "tank"
-    },
-    {
-      "game": "יום הולדת 7 לרעי",
-      "order": 5,
-      "targetName": "כפר הנופש",
-      "directions": "אני מארח מבקרים מהארץ והעולם ומקום העבודה של רבים מחברי הקיבוץ.",
-      "description": "",
-      "riddle": "",
-      "answerHash": "",
-      "englishName": "Resort",
-      "pageUrl": "https://zafrirz.github.io/Treasure/resort/",
-      "slug": "resort"
-    },
-    {
-      "game": "יום הולדת 7 לרעי",
-      "order": 6,
-      "targetName": "הגזע ההפוך בטיילת",
-      "directions": "הייתי פעם חלק מעץ, הניחו אותי הפוך בנקודת תצפית מדהימה לכנרת.",
-      "description": "",
-      "riddle": "",
-      "answerHash": "",
-      "englishName": "Upside-down-Trunk",
-      "pageUrl": "https://zafrirz.github.io/Treasure/upside-down-trunk/",
-      "slug": "upside-down-trunk"
-    },
-    {
-      "game": "יום הולדת 7 לרעי",
-      "order": 7,
-      "targetName": "קיר הטיפוס",
-      "directions": "אני",
-      "description": "תיאור",
-      "riddle": "",
-      "answerHash": "",
-      "englishName": "Climbing-Wall",
-      "pageUrl": "https://zafrirz.github.io/Treasure/climbing-wall/",
-      "slug": "climbing-wall"
-    },
-    {
-      "game": "יום הולדת 7 לרעי",
-      "order": 8,
-      "targetName": "בית זימבל לזר",
-      "directions": "לפני הרבה שנים היתה כאן הרפת של מעגן, אבל היום גרים כאן זוג עם שלושה גורי אדם וחתולה בשם מיצי.",
-      "description": "תיאור",
-      "riddle": "",
-      "answerHash": "",
-      "englishName": "Zimball-Lazar-House",
-      "pageUrl": "https://zafrirz.github.io/Treasure/zimball-lazar-house/",
-      "slug": "zimball-lazar-house"
     },
     {
       "game": "כללי",
@@ -160,6 +64,102 @@
       "englishName": "Memorial",
       "pageUrl": "https://zafrirz.github.io/Treasure/memorial/",
       "slug": "memorial"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 1,
+      "targetName": "שער הבננות",
+      "directions": "מכוניות וטרקטורים נכנסים דרכי לקיבוץ, וקראו לי על שם אחד מענפי החקלאות המניבים ביותר של מעגן.",
+      "description": "שער הבננות הוא אחד מ-6 שערים חשמליים בקיבוץ (זוכרים איפה כולם נמצאים?), והוא שער המעבר למטעי הבננות ממזרח לקיבוץ. מטעי הבננות במעגן משתרעים על שטח של כ-450 דונם ומניבים בדר\"כ יותר מ-1000 טונות של פרי בשנה.",
+      "riddle": "ספרו את מספר עמודי התמיכה האנכיים של השער (לא כולל המסגרת)",
+      "answerHash": "c74e6a3c2064cf8fd132241fe946c60aa7d9c48a6027772185c6f51a570c9067",
+      "englishName": "Banana-Gate",
+      "pageUrl": "https://zafrirz.github.io/Treasure/banana-gate/",
+      "slug": "banana-gate"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 2,
+      "targetName": "שלט הפרסום הגדול",
+      "directions": "אני נמצא באחת מפינות הקיבוץ, יש לי שני צדדים, אני גדול ובולט ואוהב שמסתכלים עלי.",
+      "description": "ליד שלט הפרסום הגדול חולפות מדי יום יותר מ-10,000 מכוניות בשני הכיוונים. אחרי שנים רבות שלא נעשה בו שימוש, הוא חודש לאחרונה ומשווק לבעלי עסקים על מנת להגדיל את הכנסות הקיבוץ לטובת הקהילה.",
+      "riddle": "מה מספר הכביש הסמוך לשלט?",
+      "answerHash": "8241649609f88ccd2a0a5b233a07a538ec313ff6adf695aa44a969dbca39f67d",
+      "englishName": "Large-Billboard",
+      "pageUrl": "https://zafrirz.github.io/Treasure/large-billboard/",
+      "slug": "large-billboard"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 3,
+      "targetName": "בית התנשמות",
+      "directions": "מגדלי האבוקדו בנו אותי כדי לארח עלי חברים עם כנפיים. ילדים אוהבים לטפס עלי למרות שיש כאן ריח לא נעים לפעמים.",
+      "description": "הוצב במטע האבוקדו הוצב כדי להזמין את הדורסות הליליות להתמקם סמוך לעצים ולסייע בהדברה טבעית של מכרסמים. זוג תנשמות עשוי לצוד אלפי מכרסמים בשנה, וכך לתרום להגנת היבול בדרך ידידותית יותר לסביבה ולהפחית את השימוש בחומרי הדברה.",
+      "riddle": "אתרו מספר בן 4 ספרות על אחד מעמודי הברזל של בית העץ סמוך לבתי התנשמות.",
+      "answerHash": "262b06d105e1c865b01c3e0a74291cdae511ef15f3d456e14fbe2dffd9efe3b9",
+      "englishName": "Owl-House",
+      "pageUrl": "https://zafrirz.github.io/Treasure/owl-house/",
+      "slug": "owl-house"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 4,
+      "targetName": "הטנק",
+      "directions": "אני עשוי מברזל, זחלתי כאן שנה לפני שקיבוץ מעגן הוקם ולא חזרתי הביתה מאז.",
+      "description": "תיאור",
+      "riddle": "לאיזו מדינה היה שייך הטנק?",
+      "answerHash": "f56d3a1540c4361703a26c300dea8c8f0fb2953781334e4b1519b83cab7b4aa9",
+      "englishName": "Tank",
+      "pageUrl": "https://zafrirz.github.io/Treasure/tank/",
+      "slug": "tank"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 5,
+      "targetName": "כפר הנופש",
+      "directions": "אני מארח מבקרים מהארץ והעולם ומקום העבודה של רבים מחברי הקיבוץ.",
+      "description": "כפר הנופש נבנה באופן ייחודי כך שיאפשר לרבים מהמבקרים ליהנות מנוף הכנרת",
+      "riddle": "",
+      "answerHash": "c74e6a3c2064cf8fd132241fe946c60aa7d9c48a6027772185c6f51a570c9067",
+      "englishName": "Resort",
+      "pageUrl": "https://zafrirz.github.io/Treasure/resort/",
+      "slug": "resort"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 6,
+      "targetName": "הגזע ההפוך בטיילת",
+      "directions": "הייתי פעם חלק מעץ, הניחו אותי הפוך בנקודת תצפית מדהימה לכנרת.",
+      "description": "",
+      "riddle": "מהו ההר הגבוה בישראל שניתן לראות מכאן ביום בהיר?",
+      "answerHash": "0b1464490ca8ba5be2bcdbcd4f065cc5cde7d249a2cb64a0a9a5e4fd7ab796fe",
+      "englishName": "Upside-down-Trunk",
+      "pageUrl": "https://zafrirz.github.io/Treasure/upside-down-trunk/",
+      "slug": "upside-down-trunk"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 7,
+      "targetName": "קיר הטיפוס",
+      "directions": "אני גבוה וצבעוני ,ובנו אותי כדי שילדים יטפסו עלי במקום על המדריכים בבית הילדים.",
+      "description": "קיר טיפוס הוא כמו חידה ענקית שפותרים עם כל הגוף. צריכים להיות חזקים, אבל גם חכמים: לחשוב איפה לשים יד, איפה לשים רגל, ולא לוותר אם לא הצלחת בפעם הראשונה.",
+      "riddle": "כמה איחזות בצבע... נמצאות על הקיר?",
+      "answerHash": "c74e6a3c2064cf8fd132241fe946c60aa7d9c48a6027772185c6f51a570c9067",
+      "englishName": "Climbing-Wall",
+      "pageUrl": "https://zafrirz.github.io/Treasure/climbing-wall/",
+      "slug": "climbing-wall"
+    },
+    {
+      "game": "יום הולדת 7 לרעי",
+      "order": 8,
+      "targetName": "בית זימבל לזר",
+      "directions": "לפני הרבה שנים היתה כאן הרפת של מעגן, אבל היום גרים כאן זוג עם שלושה גורי אדם וחתולה בשם מיצי.",
+      "description": "למרות שרפת מעגן כבר לא קיימת, מעגן עדיין מחזיק ברפת פעילה ומצליחה מאד בשותפות עם קיבוץ אלומות ומושב יונתן. הרפת נמצאת ביונתן שברמת הגולן ומונה יותר מאלף פרות שמניבות כ-14 מיליון ליטר חלב בשנה.",
+      "riddle": "מי במשפחה היה רפתן?",
+      "answerHash": "0b8824078fe7e0f682e642bd742b0f37e6f86a53cf75288853a48ffceb300d20",
+      "englishName": "Zimball-Lazar-House",
+      "pageUrl": "https://zafrirz.github.io/Treasure/zimball-lazar-house/",
+      "slug": "zimball-lazar-house"
     }
   ]
 }
