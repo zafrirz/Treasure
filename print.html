@@ -21,6 +21,7 @@
   <script>
     const basePath = "/Treasure";
     const siteUrl = "https://zafrirz.github.io/Treasure";
+    const displayGameStorageKey = "treasure-display-game";
     const params = new URLSearchParams(location.search);
     const selector = document.querySelector("#print-game-select");
     const groupsRoot = document.querySelector("#print-groups");
@@ -75,13 +76,16 @@
       .then(async loaded => {
         config = loaded;
         [...new Set(config.rows.map(row => row.game))].forEach(game => selector.add(new Option(game, game)));
-        const requested = params.get("game") || "";
+        const requested = params.get("game") || localStorage.getItem(displayGameStorageKey) || "";
         selector.value = [...selector.options].some(option => option.value === requested) ? requested : "";
         await render(selector.value, params.has("print"));
       })
       .catch(error => { groupsRoot.textContent = error.message; });
 
-    selector.addEventListener("change", () => render(selector.value).catch(error => { groupsRoot.textContent = error.message; }));
+    selector.addEventListener("change", () => {
+      localStorage.setItem(displayGameStorageKey, selector.value);
+      render(selector.value).catch(error => { groupsRoot.textContent = error.message; });
+    });
     document.querySelector("#print-now").addEventListener("click", () => render(selector.value, true).catch(error => { groupsRoot.textContent = error.message; }));
   </script>
 </body>
