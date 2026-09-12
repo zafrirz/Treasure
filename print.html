@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>הדפסת קודי QR</title>
+  <link rel="stylesheet" href="/Treasure/styles.css">
+</head>
+<body>
+  <main class="print-page">
+    <h1>קודי QR למשחק הפעיל - הדפסה בגודל 100%</h1>
+    <section id="cut-grid" class="cut-grid" aria-label="קודי QR להדפסה"></section>
+  </main>
+  <script>
+    const basePath = "/Treasure";
+    const siteUrl = "https://zafrirz.github.io/Treasure";
+    const params = new URLSearchParams(location.search);
+    fetch(`${basePath}/data.json?ts=${Date.now()}`, { cache: "no-store" })
+      .then(response => {
+        if (!response.ok) throw new Error(`לא ניתן לטעון את נתוני המשחק (${response.status}).`);
+        return response.json();
+      })
+      .then(config => {
+        const grid = document.querySelector("#cut-grid");
+        const selectedGame = params.get("game") || config.activeGame;
+        document.querySelector("h1").textContent = `קודי QR למשחק: ${selectedGame}`;
+        const imageLoads = config.rows
+          .filter(row => row.game === selectedGame)
+          .sort((a, b) => a.order - b.order)
+          .map(row => {
+            const card = document.createElement("article");
+            card.className = "cut-card";
+            const image = document.createElement("img");
+            const stableUrl = `${siteUrl}/${row.slug}/`;
+            image.src = `https://api.qrserver.com/v1/create-qr-code/?size=560x560&format=svg&margin=20&data=${encodeURIComponent(stableUrl)}`;
+            image.alt = `QR עבור ${row.englishName}`;
+            const title = document.createElement("h2");
+            title.textContent = row.englishName;
+            const base = document.createElement("p");
+            base.textContent = "zafrirz.github.io/Treasure/";
+            const slug = document.createElement("p");
+            slug.textContent = row.slug;
+            card.append(image, title, base, slug);
+            grid.append(card);
+            return new Promise(resolve => {
+              if (image.complete) resolve();
+              else {
+                image.addEventListener("load", resolve, { once: true });
+                image.addEventListener("error", resolve, { once: true });
+              }
+            });
+          });
+        if (!imageLoads.length) throw new Error("לא נמצאו יעדים למשחק שנבחר.");
+        return Promise.all(imageLoads);
+      })
+      .then(() => {
+        if (params.has("print")) window.print();
+      })
+      .catch(error => {
+        document.querySelector("#cut-grid").textContent = error.message;
+      });
+  </script>
+</body>
+</html>
